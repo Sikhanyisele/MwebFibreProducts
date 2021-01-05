@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MwebProducts"
+    }
+  },
+  "defaultProject": "MwebProducts",
+  "cli": {
+    "analytics": false
+  }
 }

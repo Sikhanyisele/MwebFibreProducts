@@ -1,0 +1,44 @@
+.card {
+    border-radius: 6px;
+    margin-right: 10px;
+    border: 2px  blue;
+    padding: 22px 18px;
+    width: 460px;
+    height: 440px;
+    justify-content: center;
+    
+    background-color: lightblue ;
+    &:hover {
+      cursor:auto;
+      box-shadow: 2px 2px;
+    }
+}
+h2{
+    font-weight: bold;
+    color: gray;
+}
+h4{
+    font-weight: bold;
+    color: blue;
+}
+h3{
+    font-weight: bold;
+    color:gray;
+}
+p{
+    color: rgb(68, 54, 54);
+    font-size: 15px;
+   
+   
+}
+h5{
+    font-weight:normal;
+    color: white;
+    font-size: 15px;
+    font-weight:600;
+    
+}
+.hr{
+    width: 50px;
+}
+ 
