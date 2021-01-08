@@ -1,61 +1,19 @@
 <div class="container" style="text-align: center;">
 
-  <h2 style="font-size: 24px;margin: 0;color: blue;">Fibre Products</h2>
-  <p style="font-size: 14px;">Select a fibre infrastructure provider below, browse the products available and complete a
-    coverage search.</p>
+  <br>
   <div class="container" style="text-align: left;">
-    <!---
-    <div class="nav">
-      <div class="main">
-        <div class="nav-label">
-        Select Fibre Campaign</div><br>
-      
-        <input (click)="filterFibre('FTTH-PREPAID')" type="radio" id="prepaid-fibre" name="campaigns" value="prepaid-fibre" style="margin-right: 5px">
-        <label for="prepaid-fibre" style="margin-right: 5px">Prepaid Fibre</label>
-        <input (click)="filterFibre('FTTH-FREESETUP-FREEROUTER')" type="radio" id="FREE-Set-up-+-Router" name="campaigns" value="FREE-Set-up-+-Router" style="margin-right: 5px">
-        <label for="FREE-Set-up-+-Router" style="margin-right: 5px">FREE Set up + Router</label><br>
-        <p style="font-size: 8px;font-style: italic;">Select the fibre campaign for which products should be loaded</p>
-      </div>
-    </div>
-    <div class="nav">
-      <div class="main">
-        <div class="nav-label">
-        Fibre Providers</div><br>
-      
-        <input type="checkbox" id="vuma-reach" name="providers" value="vuma-reach" style="margin-right: 5px">
-        <label for="vuma-reach" style="margin-right: 5px">Vuma Reach</label>
-        <input type="checkbox" id="mitchells-fibre" name="providers" value="mitchells-fibre" style="margin-right: 5px">
-        <label for="mitchells-fibre" style="margin-right: 5px">Mitchells Fibre</label><br>
-        <p style="font-size: 8px;font-style: italic;">Select the fibre providers for which products should be displayed</p>
-      </div>
-    </div>
-    <div class="nav">
-      <div class="main">
-        <div class="nav-label">
-          Price Ranges</div><br>
-      
-        <input type="checkbox" id="R0-R699" name="prices" value="R0-R699" style="margin-right: 5px">
-        <label for="R0-R699" style="margin-right: 5px">R0 - R699</label>
-        <input type="checkbox" id="R700-R999" name="prices" value="R700-R999" style="margin-right: 5px">
-        <label for="R700-R999" style="margin-right: 5px">R700 - R999</label>
-        <input type="checkbox" id="R1000+" name="providers" value="R1000+" style="margin-right: 5px">
-        <label for="R1000+" style="margin-right: 5px">R1000+</label><br>
-        <p style="font-size: 8px;font-style: italic;">Select the price ranges to filter the products by. No selection includes all products</p>
-      </div>
-    </div>
-    -->
-    <!-- <form style="margin:left"></form> -->
+    <h5 style="color:blue; text-transform:uppercase">Explore Mweb fibre products according to your preferences</h5><br>
     <div class="campaigns">
       <p> Select Fibre Campaign </p>
     </div>
     <div [formGroup]="campaignForm">
-      <input formControlName="campaign" checked type="radio" id="prepaid-fibre"
-        value="FTTH-PREPAID" name="campaign" style="margin-right: 5px">
+      <input formControlName="campaign" checked type="radio" id="prepaid-fibre" value="FTTH-PREPAID" name="campaign"
+        style="margin-right: 5px">
       <label for="prepaid-fibre" style="margin-right: 5px">Prepaid Fibre</label>
-      <input formControlName="campaign" type="radio"
-        id="FTTH-FREESETUP-FREEROUTER" value="FTTH-FREESETUP-FREEROUTER" name="campaign" style="margin-right: 5px">
+      <input formControlName="campaign" type="radio" id="FTTH-FREESETUP-FREEROUTER" value="FTTH-FREESETUP-FREEROUTER"
+        name="campaign" style="margin-right: 5px">
       <label for="FTTH-FREESETUP-FREEROUTER" style="margin-right: 5px">FREE Set up + Router</label><br>
-     
+
     </div>
     <div>
       <p style="font-size: 12px;font-style: italic;text-align: left;">Select the fibre campaign for which products
@@ -66,67 +24,86 @@
           <div class="campaigns">
             <p> Fibre Providers</p>
           </div>
-          <ng-container *ngIf="campaignForm.controls.campaign.value === 'FTTH-PREPAID'; else FREEROUTER">
-            <input type="checkbox" id="vuma-reach" name="prepaid-fibre" value="vuma-reach" style="margin-right: 5px">
-            <label for="vuma-reach" style="margin-right: 5px">Vuma Reach</label>
-            <input type="checkbox" id="mitchells-fibre" name="prepaid-fibre" value="mitchells-fibre"
-              style="margin-right: 5px">
-            <label for="mitchells-fibre" style="margin-right: 5px">Mitchells Fibre</label><br>
+          <form [formGroup]="prepaidFibreProvidersForm"
+            *ngIf="campaignForm.controls.campaign.value === 'FTTH-PREPAID'; else FREEROUTER">
+
+                <input formControlName="vuma_reach"  type="checkbox" id="vuma-reach" name="vuma_reach" value="vuma-reach" style="margin-right: 5px">
+                <label for="vuma-reach" style="margin-right: 5px">Vuma Reach</label>
+            
+    
+                <input formControlName="mitchells_fibre" type="checkbox" id="mitchells-fibre" name="mitchells_fibre" value="mitchells-fibre"
+                  style="margin-right: 5px">
+                <label for="mitchells-fibre" style="margin-right: 5px">Mitchells Fibre</label><br>
+ 
             <p style="font-size: 12px;font-style: italic;text-align: left;">Select the fibre providers for which
               products
               should be displayed</p>
-          </ng-container>
+          </form>
 
 
 
           <ng-template #FREEROUTER>
-            <input type="checkbox" id="evotel" name="FTTH-FREESETUP-FREEROUTER" value="evotel"
+            <form [formGroup] = "freeSetupProvidersForm">
+
+            <input formControlName="evotel" type="checkbox" id="evotel" name="evotel" value="evotel"
               style="margin-right: 5px">
             <label for="Evotel" style="margin-right: 5px">Evotel</label>
-            <input type="checkbox" id="mfn" name="FTTH-FREESETUP-FREEROUTER" value="mfn" style="margin-right: 5px">
+
+            <input formControlName="mfn" type="checkbox" id="mfn" name="mfn" value="mfn" style="margin-right: 5px">
             <label for="mfn" style="margin-right: 5px">MFN</label>
-            <input type="checkbox" id="vumatel" name="FTTH-FREESETUP-FREEROUTER" value="vumatel"
+
+            <input formControlName="vumatel" type="checkbox" id="vumatel" name="vumatel" value="vumatel"
               style="margin-right: 5px">
             <label for="vumatel" style="margin-right: 5px">Vumatel</label>
-            <input type="checkbox" id="frogfoot" name="FTTH-FREESETUP-FREEROUTER" value="frogfoot"
+
+            <input formControlName="frogfoot" type="checkbox" id="frogfoot" name="frogfoot" value="frogfoot"
               style="margin-right: 5px">
             <label for="frogfoot" style="margin-right: 5px">Frogfoot</label>
-            <input type="checkbox" id="openserve" name="FTTH-FREESETUP-FREEROUTER" value="openserve"
+
+            <input formControlName="openserve" type="checkbox" id="openserve" name="openserve" value="openserve"
               style="margin-right: 5px">
             <label for="openserve" style="margin-right: 5px">OpenServe</label>
-            <input type="checkbox" id="link-africa" name="FTTH-FREESETUP-FREEROUTER" value="link-africa"
+
+            <input formControlName="link_africa" type="checkbox" id="link-africa" name="link_africa" value="link-africa"
               style="margin-right: 5px">
             <label for="link-africa" style="margin-right: 5px">Link Africa</label>
-            <input type="checkbox" id="century-city-connect" name="FTTH-FREESETUP-FREEROUTER"
+
+            <input formControlName="century_city_connect" type="checkbox" id="century_city_connect" name="century_city_connect"
               value="century-city-connect" style="margin-right: 5px">
             <label for="century-city-connect" style="margin-right: 5px">Century City Connect</label>
-            <input type="checkbox" id="lightsruck" name="FTTH-FREESETUP-FREEROUTER" value="lightsruck"
+
+            <input formControlName="lightstruck" type="checkbox" id="lightsruck" name="lightstruck" value="lightsruck"
               style="margin-right: 5px">
-            <label for="lightsruck" style="margin-right: 5px">Lighstruck</label>
-            <input type="checkbox" id="octotel" name="FTTH-FREESETUP-FREEROUTER" value="octotel"
+            <label for="lightsruck" style="margin-right: 5px">Lightstruck</label>
+
+            <input formControlName="octotel" type="checkbox" id="octotel" name="octotel" value="octotel"
               style="margin-right: 5px">
             <label for="octotel" style="margin-right: 5px">Octotel</label>
-            <input type="checkbox" id="vodacom" name="FTTH-FREESETUP-FREEROUTER" value="vodacom"
+
+            <input formControlName="vodacom" type="checkbox" id="vodacom" name="vodacom" value="vodacom"
               style="margin-right: 5px">
             <label for="vodacom" style="margin-right: 5px">Vodacom</label>
-            <input type="checkbox" id="link-layer" name="FTTH-FREESETUP-FREEROUTER" value="link-layer"
+
+            <input formControlName="link_layer" type="checkbox" id="link-layer" name="link_layer" value="link-layer"
               style="margin-right: 5px">
             <label for="link-layer" style="margin-right: 5px">Link Layer</label><br>
+
             <p style="font-size: 12px;font-style: italic;text-align: left;">Select the fibre providers for which
               products should be displayed</p>
+            </form>
           </ng-template>
 
         </div>
       </div><br>
-      <div>
+      <div [formGroup]="priceRangeForm">
         <div class="campaigns">
           <p> Price Ranges</p>
         </div>
-        <input type="checkbox" id="R0-R699" name="prices" value="R0-R699" style="margin-right: 5px">
+        <input formControlName="R0_699" type="checkbox" id="R0-R699" name="R0_699" value="R0-R699" style="margin-right: 5px">
         <label for="R0-R699" style="margin-right: 5px">R0 - R699</label>
-        <input type="checkbox" id="R700-R999" name="prices" value="R700-R999" style="margin-right: 5px">
+        <input formControlName="R700_999" type="checkbox" id="R700-R999" name="R700_999" value="R700-R999" style="margin-right: 5px">
         <label for="R700-R999" style="margin-right: 5px">R700 - R999</label>
-        <input type="checkbox" id="R1000+" name="providers" value="R1000+" style="margin-right: 5px">
+        <input formControlName="R1000" type="checkbox" id="R1000+" name="R1000" value="R1000+" style="margin-right: 5px">
         <label for="R1000+" style="margin-right: 5px">R1000+</label><br>
         <p style="font-size: 12px;font-style: italic;text-align: left;">Select the price ranges to filter the products
           by. No selection includes all products</p>
@@ -134,24 +111,19 @@
       </div>
 
       <div class="campaigns" style="background-color: white;color: blue;">
-        <p> Products</p>
-        
-        <div class="card-container" *ngIf="promoProducts">
-          
-          <ng-container *ngFor="let promoProd of promoProducts">
-            <p *ngFor="let prod of promoProd['products']">
-              {{ prod.productName }} <br />
-              {{ prod.productCode }}
-              {{ prod.productRate }}
-              {{ prod.productRate }}
-              {{ prod.provider}}
-            </p>
-          </ng-container>
-        </div>
-      </div>
 
+
+      
+          Products <br><br>
+          <p *ngFor="let prod of myProducts" style="font-size: 12px;text-align: left;">
+            {{ prod.productName }}
+            R{{ prod.productRate }}
+          </p>
+      </div>
     </div>
+
   </div>
-  <ng-template #loading>
-    <p>Please wait while we get data</p>
-  </ng-template>
+</div>
+<ng-template #loading>
+  <p>Please wait while we get data</p>
+</ng-template>
